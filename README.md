@@ -1,7 +1,4 @@
----
-title: "README.md"
-output: html_document
----
+# README.md
 
 This repository contains all the code and documentation for Coursera's Getting and Cleaning Data course project.
 

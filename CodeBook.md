@@ -1,7 +1,5 @@
----
-title: "CodeBook"
-output: html_document
----
+# CodeBook
+
 A script named run_analysis.R is submitted containing all the instructions required to transform a set of data from several txt files into one tidy dataset.
 
 * First, the necessary libraries are loaded (plyr) so as to perform such commands as ddply on the dataset;
