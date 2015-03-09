@@ -19,16 +19,17 @@ This R markdown file lists all the instructions needed to complete the project.
 library(plyr)
 library(ggplot2)
 library(knitr)
+opts_chunk$set(echo = TRUE, results = 'hold')
 ```
 
 - Loading data and investigating classes:
-```{r echo = TRUE} 
+```{r} 
 activity <- read.csv("activity.csv", header = TRUE)
 str(activity)
 ```
 
 - Converting the date variable to the proper date format:
-```{r echo = TRUE} 
+```{r} 
 activity$date <- as.Date(activity$date, format = "%Y-%m-%d")
 str(activity)
 ```
@@ -41,7 +42,7 @@ activity_by_day <- ddply(activity_clean[,1:2], .(date), summarise, steps = sum(s
 ```
 
 - Building graphics:
-```{r echo = TRUE} 
+```{r} 
 graph1 <- ggplot(activity_by_day, aes(x = steps)) +
           geom_histogram(colour ="blue", fill = "yellow", binwidth=1000) +
           scale_x_continuous(breaks = c(0, 4000, 8000, 12000, 16000, 20000)) +
@@ -52,7 +53,7 @@ print(graph1)
 ```
 
 - Calculating mean and median:
-```{r echo = TRUE} 
+```{r} 
 mean(activity_by_day$steps)
 median(activity_by_day$steps)
 ```
@@ -65,7 +66,7 @@ activity_by_interval <- ddply(activity_clean[, c("steps", "interval")], .(interv
 ```
 
 - Building graphics:
-```{r echo = TRUE} 
+```{r} 
 graph2 <- ggplot(activity_by_interval, aes(x = interval, y = steps)) +
           geom_line(color = "blue") +
           labs(title = "Average number of steps per 5 minute time interval", 
@@ -74,13 +75,13 @@ print(graph2)
 ```
 
 - The interval containing the maximum number of steps turns out to be the following:
-```{r echo = TRUE} 
+```{r} 
 activity_by_interval[activity_by_interval$steps == max(activity_by_interval$steps), ]
 ```
 
 ###Imputing missing values###
 - Calculating the total number of rows where steps value is missing:
-```{r echo = TRUE} 
+```{r} 
 sum(is.na(activity$steps))
 ```
 
@@ -94,7 +95,7 @@ activity_full <- ddply(activity, .(date, interval), mutate, steps = return_mean(
 ```
 
 - Building graphics:
-```{r echo = TRUE} 
+```{r} 
 activity_by_day_full <- ddply(activity_full[,1:2], .(date), summarise, 
                               steps = sum(steps))
 graph3 <- ggplot(activity_by_day_full, aes(x = steps)) +
@@ -107,14 +108,14 @@ print(graph3)
 ```
 
 - Calculating mean and median; the mean appears to be the same value as above while the median now equals the mean, differently from above:
-```{r echo = TRUE} 
+```{r} 
 mean(activity_by_day_full$steps)
 median(activity_by_day_full$steps)
 ```
 
 ###Are there differences in activity patterns between weekdays and weekends?###
 - Creating a new factor variable from the date variable, consisting in only two levels, one for weekdays and one for weekends:
-```{r echo = TRUE} 
+```{r} 
 activity_full$weekday <- as.factor(weekdays(activity_full$date))
 levels(activity_full$weekday) <- list(
     "weekday" = c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday"),
@@ -122,7 +123,7 @@ levels(activity_full$weekday) <- list(
 ```
 
 - Subsetting data and building graphics:
-```{r echo = TRUE} 
+```{r} 
 activity_by_week_factor <- ddply(activity_full[, c("steps", "interval", "weekday")],
                                  .(interval, weekday), summarise, steps = mean(steps))
 graph4 <- ggplot(activity_by_week_factor, aes(x=interval, y=steps)) +

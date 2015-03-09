@@ -73,7 +73,8 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 </ul>
 <pre class="r"><code>library(plyr)
 library(ggplot2)
-library(knitr)</code></pre>
+library(knitr)
+opts_chunk$set(echo = TRUE, results = 'hold')</code></pre>
 <ul>
 <li>Loading data and investigating classes:</li>
 </ul>
@@ -114,10 +115,10 @@ print(graph1)</code></pre>
 <ul>
 <li>Calculating mean and median:</li>
 </ul>
-<pre class="r"><code>mean(activity_by_day$steps)</code></pre>
-<pre><code>## [1] 10766.19</code></pre>
-<pre class="r"><code>median(activity_by_day$steps)</code></pre>
-<pre><code>## [1] 10765</code></pre>
+<pre class="r"><code>mean(activity_by_day$steps)
+median(activity_by_day$steps)</code></pre>
+<pre><code>## [1] 10766.19
+## [1] 10765</code></pre>
 </div>
 <div id="what-is-the-average-daily-activity-pattern" class="section level3">
 <h3>What is the average daily activity pattern?</h3>
@@ -173,10 +174,10 @@ print(graph3)</code></pre>
 <ul>
 <li>Calculating mean and median; the mean appears to be the same value as above while the median now equals the mean, differently from above:</li>
 </ul>
-<pre class="r"><code>mean(activity_by_day_full$steps)</code></pre>
-<pre><code>## [1] 10766.19</code></pre>
-<pre class="r"><code>median(activity_by_day_full$steps)</code></pre>
-<pre><code>## [1] 10766.19</code></pre>
+<pre class="r"><code>mean(activity_by_day_full$steps)
+median(activity_by_day_full$steps)</code></pre>
+<pre><code>## [1] 10766.19
+## [1] 10766.19</code></pre>
 </div>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level3">
 <h3>Are there differences in activity patterns between weekdays and weekends?</h3>
